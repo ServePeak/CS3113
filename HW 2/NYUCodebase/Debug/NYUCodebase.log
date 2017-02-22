@@ -1,27 +1,26 @@
 ﻿  main.cpp
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(92): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(93): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(89): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(90): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(91): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(92): warning C4305: 'argument': truncation from 'double' to 'float'
 c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(94): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(95): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(96): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(98): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(138): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(138): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(157): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(158): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(161): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(162): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(167): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(167): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(184): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(185): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(188): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(189): warning C4305: '-=': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(194): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(194): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(214): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(217): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(226): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(226): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(132): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(132): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(149): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(150): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(152): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(153): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(158): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(158): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(170): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(171): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(173): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(174): warning C4305: '-=': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(179): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(179): warning C4305: 'initializing': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(194): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(197): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(206): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(206): warning C4305: 'initializing': truncation from 'double' to 'float'
   NYUCodebase.vcxproj -> C:\Users\Jia\Documents\GitHub\CS3113\HW 2\Debug\NYUCodebase.exe
   NYUCodebase.vcxproj -> C:\Users\Jia\Documents\GitHub\CS3113\HW 2\Debug\NYUCodebase.pdb (Full PDB)

@@ -61,7 +61,6 @@ public:
 	float speed;
 };
 
-
 int main(int argc, char *argv[])
 {
 	SDL_Init(SDL_INIT_VIDEO);
@@ -78,7 +77,6 @@ int main(int argc, char *argv[])
 	ShaderProgram program(RESOURCE_FOLDER"vertex_textured.glsl", RESOURCE_FOLDER"fragment_textured.glsl");
 
 	GLuint bg = LoadTexture(RESOURCE_FOLDER"Textures/background.png");
-	GLuint dot = LoadTexture(RESOURCE_FOLDER"Textures/dot.png");
 	GLuint winner = LoadTexture(RESOURCE_FOLDER"Textures/winner.png");
 
 	Matrix ball;
@@ -88,10 +86,8 @@ int main(int argc, char *argv[])
 	Matrix modelMatrix;
 	Matrix viewMatrix;
 
-	float angle = float((rand() % 4) * 90 + 45);
-	float dirX = cos((angle * 3.1415) / 180);
-	float dirY = sin((angle * 3.1415) / 180);
-	Ball aBall(0.0, 0.14, 0.14, 0.0, dirX, dirY, 1.0);
+	float angle = float((rand() % 4) * 90 + 45) * 3.1415 / 180;
+	Ball aBall(0.0, 0.14, 0.14, 0.0, cos(angle), sin(angle), 1.0);
 	Paddle leftPaddle(-3.55, 0.56, -3.41, 0.0);
 	Paddle rightPaddle(3.41, 0.56, 3.55, 0.0);
 
@@ -103,8 +99,7 @@ int main(int argc, char *argv[])
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	float lastFrameTicks = 0.0;
-	float move = 0.0;
-	// End Settop
+	// End Setup
 
 	SDL_Event event;
 	bool done = false;
@@ -118,7 +113,6 @@ int main(int argc, char *argv[])
 		float ticks = (float)SDL_GetTicks() / 1000.0f;
 		float elapsed = ticks - lastFrameTicks;
 		lastFrameTicks = ticks;
-		move += elapsed;
 
 		// Drawing
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -127,7 +121,7 @@ int main(int argc, char *argv[])
 		program.setProjectionMatrix(projectionMatrix);
 		program.setViewMatrix(viewMatrix);
 
-		// Movement
+		// Enable Keyboard Inputs
 		const Uint8* keys = SDL_GetKeyboardState(NULL);
 
 		// Background
@@ -139,8 +133,8 @@ int main(int argc, char *argv[])
 		glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, aVertices);
 		glEnableVertexAttribArray(program.positionAttribute);
 
-		float aTexCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
-		glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, aTexCoords);
+		float texCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
+		glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, texCoords);
 		glEnableVertexAttribArray(program.texCoordAttribute);
 
 		glDrawArrays(GL_TRIANGLES, 0, 6);
@@ -149,15 +143,12 @@ int main(int argc, char *argv[])
 		glDisableVertexAttribArray(program.texCoordAttribute);
 		// End Background
 
-		glBindTexture(GL_TEXTURE_2D, dot); // Make everything from here on white
-
 		// Left Paddle
 		lPaddle.identity();
 		if (keys[SDL_SCANCODE_W] && leftPaddle.top < 1.86) {
 			leftPaddle.top += 0.002;
 			leftPaddle.bottom += 0.002;
-		}
-		else if (keys[SDL_SCANCODE_S] && leftPaddle.bottom > -2.0) {
+		} else if (keys[SDL_SCANCODE_S] && leftPaddle.bottom > -2.0) {
 			leftPaddle.top -= 0.002;
 			leftPaddle.bottom -= 0.002;
 		}
@@ -168,14 +159,9 @@ int main(int argc, char *argv[])
 		glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, bVertices);
 		glEnableVertexAttribArray(program.positionAttribute);
 
-		float bTexCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
-		glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, bTexCoords);
-		glEnableVertexAttribArray(program.texCoordAttribute);
-
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		glDisableVertexAttribArray(program.positionAttribute);
-		glDisableVertexAttribArray(program.texCoordAttribute);
 		// End Left Paddle
 
 		// Right Paddle
@@ -183,8 +169,7 @@ int main(int argc, char *argv[])
 		if (keys[SDL_SCANCODE_UP] && rightPaddle.top < 1.86) {
 			rightPaddle.top += 0.002;
 			rightPaddle.bottom += 0.002;
-		}
-		else if (keys[SDL_SCANCODE_DOWN] && rightPaddle.bottom > -2.0) {
+		} else if (keys[SDL_SCANCODE_DOWN] && rightPaddle.bottom > -2.0) {
 			rightPaddle.top -= 0.002;
 			rightPaddle.bottom -= 0.002;
 		}
@@ -195,24 +180,19 @@ int main(int argc, char *argv[])
 		glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, cVertices);
 		glEnableVertexAttribArray(program.positionAttribute);
 
-		float cTexCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
-		glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, cTexCoords);
-		glEnableVertexAttribArray(program.texCoordAttribute);
-
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		glDisableVertexAttribArray(program.positionAttribute);
-		glDisableVertexAttribArray(program.texCoordAttribute);
 		// End Right Paddle
 
 		// Ball
 		ball.identity();
-		if (aBall.top > 1.86 && aBall.dirY > 0 || aBall.bottom < -2.0 && aBall.dirY < 0) {
+		if (aBall.top > 1.86 && aBall.dirY > 0 || aBall.bottom < -2.0 && aBall.dirY < 0) { // Top and Bottom collision
 			aBall.dirY *= -1.0;
-		} else if (aBall.left < leftPaddle.right && aBall.top < leftPaddle.top && aBall.bottom > leftPaddle.bottom && aBall.dirX < 0) {
+		} else if (aBall.left < leftPaddle.right && aBall.top < leftPaddle.top && aBall.bottom > leftPaddle.bottom && aBall.dirX < 0) { // Left Collison
 			aBall.dirX *= -1.0;
 			aBall.speed += 0.1;
-		} else if (aBall.right > rightPaddle.left && aBall.top < rightPaddle.top && aBall.bottom > rightPaddle.bottom && aBall.dirX > 0) {
+		} else if (aBall.right > rightPaddle.left && aBall.top < rightPaddle.top && aBall.bottom > rightPaddle.bottom && aBall.dirX > 0) { // Right Collison
 			aBall.dirX *= -1.0;
 			aBall.speed += 0.1;
 		}
@@ -227,14 +207,9 @@ int main(int argc, char *argv[])
 		glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, dVertices);
 		glEnableVertexAttribArray(program.positionAttribute);
 
-		float dTexCoords[] = { 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 0.0 };
-		glVertexAttribPointer(program.texCoordAttribute, 2, GL_FLOAT, false, 0, dTexCoords);
-		glEnableVertexAttribArray(program.texCoordAttribute);
-
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 
 		glDisableVertexAttribArray(program.positionAttribute);
-		glDisableVertexAttribArray(program.texCoordAttribute);
 		// End Ball
 
 		// Game End
@@ -245,9 +220,9 @@ int main(int argc, char *argv[])
 
 			float e1Vertices[] = { -3.0, -1.0, -1.0, -1.0, -1.0, 1.0, -3.0, -1.0, -1.0, 1.0, -3.0, 1.0 };
 			float e2Vertices[] = { 1.0, -1.0, 3.0, -1.0, 3.0, 1.0, 1.0, -1.0, 3.0, 1.0, 1.0, 1.0 };
-			if (aBall.left < 0)
+			if (aBall.left > 0) // Left side wins
 				glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, e1Vertices);
-			else if(aBall.left > 0)
+			else if (aBall.left < 0) // Right side wins
 				glVertexAttribPointer(program.positionAttribute, 2, GL_FLOAT, false, 0, e2Vertices);
 			glEnableVertexAttribArray(program.positionAttribute);
 
@@ -259,10 +234,11 @@ int main(int argc, char *argv[])
 
 			glDisableVertexAttribArray(program.positionAttribute);
 			glDisableVertexAttribArray(program.texCoordAttribute);
-			SDL_GL_SwapWindow(displayWindow);
+			SDL_GL_SwapWindow(displayWindow); // You need this to draw the last image before closing
 			Sleep(3000); // I don't know a better way of doing this
 			break;
 		}
+		// End Game End
 
 		SDL_GL_SwapWindow(displayWindow);
 		// End Drawing
