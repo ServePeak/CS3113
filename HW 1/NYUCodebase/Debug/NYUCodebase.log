@@ -1,6 +1,0 @@
-﻿  main.cpp
-c:\users\jia\documents\github\cs3113\hw 1\nyucodebase\main.cpp(67): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 1\nyucodebase\main.cpp(141): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\jia\documents\github\cs3113\hw 1\nyucodebase\main.cpp(183): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  NYUCodebase.vcxproj -> C:\Users\Jia\Documents\GitHub\CS3113\HW 1\Debug\NYUCodebase.exe
-  NYUCodebase.vcxproj -> C:\Users\Jia\Documents\GitHub\CS3113\HW 1\Debug\NYUCodebase.pdb (Full PDB)
