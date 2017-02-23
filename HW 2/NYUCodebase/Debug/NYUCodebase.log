@@ -18,8 +18,8 @@ c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(173): warning C43
 c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(174): warning C4305: '-=': truncation from 'double' to 'float'
 c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(179): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
 c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(179): warning C4305: 'initializing': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(194): warning C4305: '+=': truncation from 'double' to 'float'
-c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(197): warning C4305: '+=': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(194): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(197): warning C4305: '*=': truncation from 'double' to 'float'
 c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(206): warning C4838: conversion from 'double' to 'float' requires a narrowing conversion
 c:\users\jia\documents\github\cs3113\hw 2\nyucodebase\main.cpp(206): warning C4305: 'initializing': truncation from 'double' to 'float'
   NYUCodebase.vcxproj -> C:\Users\Jia\Documents\GitHub\CS3113\HW 2\Debug\NYUCodebase.exe

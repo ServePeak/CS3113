@@ -191,10 +191,10 @@ int main(int argc, char *argv[])
 			aBall.dirY *= -1.0;
 		} else if (aBall.left < leftPaddle.right && aBall.top < leftPaddle.top && aBall.bottom > leftPaddle.bottom && aBall.dirX < 0) { // Left Collison
 			aBall.dirX *= -1.0;
-			aBall.speed += 0.1;
+			aBall.speed *= 1.1;
 		} else if (aBall.right > rightPaddle.left && aBall.top < rightPaddle.top && aBall.bottom > rightPaddle.bottom && aBall.dirX > 0) { // Right Collison
 			aBall.dirX *= -1.0;
-			aBall.speed += 0.1;
+			aBall.speed *= 1.1;
 		}
 		aBall.left += aBall.dirX * elapsed * aBall.speed;
 		aBall.right += aBall.dirX * elapsed * aBall.speed;
