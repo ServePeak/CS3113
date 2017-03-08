@@ -241,6 +241,12 @@ void RenderLose(Matrix& modelMatrix, ShaderProgram& program) {
 	modelMatrix.Translate(-0.5f, 0.0f, 0.0f);
 	program.setModelMatrix(modelMatrix);
 	DrawText(&program, font, "YOU LOSE", 0.15f, 0.0f);
+
+	modelMatrix.identity();
+	modelMatrix.Scale(1.5f, 1.5f, 0.0f);
+	modelMatrix.Translate(-1.2f, -0.5f, 0.0f);
+	program.setModelMatrix(modelMatrix);
+	DrawText(&program, font, "YOU HIT " + std::to_string(hit) + " ENEMIES", 0.15f, 0.0f);
 }
 
 void RenderWin(Matrix& modelMatrix, ShaderProgram& program) {
@@ -271,6 +277,12 @@ void RenderWin(Matrix& modelMatrix, ShaderProgram& program) {
 	modelMatrix.Translate(-0.5f, 0.0f, 0.0f);
 	program.setModelMatrix(modelMatrix);
 	DrawText(&program, font, "YOU WIN!", 0.15f, 0.0f);
+
+	modelMatrix.identity();
+	modelMatrix.Scale(1.5f, 1.5f, 0.0f);
+	modelMatrix.Translate(-2.0f, -0.5f, 0.0f);
+	program.setModelMatrix(modelMatrix);
+	DrawText(&program, font, "PRESS SPACEBAR TO PLAY AGAIN", 0.15f, 0.0f);
 }
 
 void RenderGameplay(Matrix& modelMatrix, ShaderProgram& program) {
@@ -444,7 +456,7 @@ int main(int argc, char *argv[]) {
 	pbulletSprite = SheetSprite(spriteSheetTexture, 856.0f / 1024.0f, 421.0f / 1024.0f, 9.0f / 1024.0f, 54.0f / 1024.0f, 0.2f);
 
 	// Create enemy bullets
-	ebulletSprite = SheetSprite(spriteSheetTexture, 858.0f / 1024.0f, 230.0f / 1024.0f, 9.0f / 1024.0f, 54.0f / 1024.0f, 0.2f);
+	ebulletSprite = SheetSprite(spriteSheetTexture, 856.0f / 1024.0f, 926.0f / 1024.0f, 9.0f / 1024.0f, 57.0f / 1024.0f, 0.2f);
 	// End Setup
 
 	SDL_Event event;
@@ -474,17 +486,9 @@ int main(int argc, char *argv[]) {
 		// Enable Keyboard Inputs
 		const Uint8* keys = SDL_GetKeyboardState(NULL);
 
-		if (keys[SDL_SCANCODE_SPACE] && state == 0) {
+		if (keys[SDL_SCANCODE_SPACE] && (state == 0 || state == 2)) {
 			state = 1;
 		}
-
-		// For testing variables
-		GLuint font = LoadTexture(RESOURCE_FOLDER"Textures/font1.png");
-		modelMatrix.identity();
-		modelMatrix.Scale(1.5f, 1.5f, 0.0f);
-		modelMatrix.Translate(-2.3f, 1.3f, 0.0f);
-		program.setModelMatrix(modelMatrix);
-		DrawText(&program, font, std::to_string(hit), 0.15f, 0.0f);
 
 		// Render state
 		switch (state) {
