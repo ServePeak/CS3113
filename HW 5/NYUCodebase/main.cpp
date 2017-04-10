@@ -237,8 +237,8 @@ public:
 	// I tried to do this without it in entities and it didn't work :(
 	void collision(Entity& other) {
 		if (checkSATCollision(points, other.points, penetration)) {
-			position.x -= penetration.x / 5.0f;
-			position.y -= penetration.y / 5.0f;
+			other.position.x -= penetration.x / 1.5f;
+			other.position.y -= penetration.y / 1.5f;
 			velocity.x *= -1.0f;
 			velocity.y *= -1.0f;
 			other.velocity.x *= -1.0f;
