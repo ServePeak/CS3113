@@ -279,13 +279,13 @@ void setCollideFalse(Entity& entity) {
 
 // Highly unoptimnized, look at W4C1
 void LoadSprites() {
-	// Player
+	// Player with animation
 	GLuint playerTexture = LoadTexture("Textures/players.png");
 	playerSprite.push_back(SheetSprite(playerTexture, 246.0f / 512.0f, 44.0f / 512.0f, 38.0f / 512.0f, 50.0f / 512.0f, 0.3f));
 	playerSprite.push_back(SheetSprite(playerTexture, 282.0f / 512.0f, 345.0f / 512.0f, 38.0f / 512.0f, 48.0f / 512.0f, 0.3f));
 	playerSprite.push_back(SheetSprite(playerTexture, 246.0f / 512.0f, 446.0f / 512.0f, 38.0f / 512.0f, 50.0f / 512.0f, 0.3f));
 
-	// Portal
+	// Portal, all 8 combine to create a portal
 	GLuint portalTexture = LoadTexture("Textures/portal.png");
 	portalSprite.push_back(SheetSprite(portalTexture, 0.0f / 840.0f, 0.0f / 457.0f, 209.0f / 840.0f, 228.0f / 457.0f, 0.8f));
 	portalSprite.push_back(SheetSprite(portalTexture, 210.0f / 840.0f, 0.0f / 457.0f, 209.0f / 840.0f, 228.0f / 457.0f, 0.8f));
@@ -296,7 +296,7 @@ void LoadSprites() {
 	portalSprite.push_back(SheetSprite(portalTexture, 420.0f / 840.0f, 229.0f / 457.0f, 209.0f / 840.0f, 228.0f / 457.0f, 0.8f));
 	portalSprite.push_back(SheetSprite(portalTexture, 630.0f / 840.0f, 229.0f / 457.0f, 209.0f / 840.0f, 228.0f / 457.0f, 0.8f));
 
-	// Tiles
+	// Tiles - left, right, middle, curved both size, raised tile
 	GLuint tileTexture = LoadTexture("Textures/tiles.png");
 	bgFloor.push_back(SheetSprite(tileTexture, 325.0f / 512.0f, 882.0f / 1024.0f, 64.0f / 512.0f, 64.0f / 1024.0f, 0.3f));
 	bgFloor.push_back(SheetSprite(tileTexture, 390.0f / 512.0f, 520.0f / 1024.0f, 64.0f / 512.0f, 64.0f / 1024.0f, 0.3f));
@@ -304,7 +304,7 @@ void LoadSprites() {
 	bgFloor.push_back(SheetSprite(tileTexture, 390.0f / 512.0f, 392.0f / 1024.0f, 64.0f / 512.0f, 64.0f / 1024.0f, 0.3f));
 	bgFloor.push_back(SheetSprite(tileTexture, 390.0f / 512.0f, 650.0f / 1024.0f, 64.0f / 512.0f, 64.0f / 1024.0f, 0.3f));
 
-	// Rocks
+	// Rocks - eight different rock types, randomly generated in game
 	GLuint rockTexture = LoadTexture("Textures/rocks.png");
 	rockSprite.push_back(SheetSprite(rockTexture, 15.0f / 1024.0f, 15.0f / 1024.0f, 98.0f / 1024.0f, 98.0f / 1024.0f, 0.3f));
 	rockSprite.push_back(SheetSprite(rockTexture, 15.0f / 1024.0f, 143.0f / 1024.0f, 98.0f / 1024.0f, 98.0f / 1024.0f, 0.3f));
@@ -382,18 +382,20 @@ void LoadStage1() {
 	player = Entity(0.0f, -1.0f, playerSprite[0], PLAYER_SPRITE);
 	portal = Entity(12.0f, -0.8f, portalSprite[0], WARP_TILE);
 
+	//First Block
 	gameFloor.push_back(Entity(0.0f, -1.3f, bgFloor[LEFT], LEFT_TILE));
 	for (int i = 0; i < 10; i++) {
 		gameFloor.push_back(Entity(0.6f*(i + 1), -1.3f, bgFloor[MIDDLE], MIDDLE_TILE));
 	}
 	gameFloor.push_back(Entity(6.6f, -1.3f, bgFloor[RIGHT], RIGHT_TILE));
 
+	//Second Block
 	gameFloor.push_back(Entity(7.8f, -1.3f, bgFloor[LEFT], LEFT_TILE));
 	for (int i = 13; i < 16; i++) {
 		gameFloor.push_back(Entity(0.6f*(i + 1), -1.3f, bgFloor[MIDDLE], MIDDLE_TILE));
 	}
-	gameFloor.push_back(Entity(10.2f, -1.01f, bgFloor[BOTH], BOTH_TILE));
-	gameFloor.push_back(Entity(10.2f, -1.3f, bgFloor[BLOCK], BLOCK_TILE));
+	gameFloor.push_back(Entity(10.2f, -1.01f, bgFloor[BOTH], BOTH_TILE)); //elevated tile bottom
+	gameFloor.push_back(Entity(10.2f, -1.3f, bgFloor[BLOCK], BLOCK_TILE)); //elevated tile top
 	for (int i = 17; i < 19; i++) {
 		gameFloor.push_back(Entity(0.6f*(i + 1), -1.3f, bgFloor[MIDDLE], MIDDLE_TILE));
 	}
@@ -411,7 +413,7 @@ void LoadStage2() {
 
 	player = Entity(0.0f, -1.0f, playerSprite[0], PLAYER_SPRITE);
 	enemies.push_back(Entity(18.0f, -0.45f, mirrorSprite[0], MIRROR_SPRITE));
-	enemies[enemies.size() - 1].left = true;
+	enemies[enemies.size() - 1].left = true; //or enemies[0]
 	enemyAnim.push_back(0);
 	enemyDelay.push_back(0);
 	portal = Entity(19.8f, -0.8f, portalSprite[0], WARP_TILE); //need to change once everything is done
@@ -1101,7 +1103,7 @@ void UpdateGameplay(float elapsed) {
 					gameObj[i].position.y + gameObj[i].sprite.height > enemies[j].position.y - enemies[j].sprite.height * 2) {
 					if (enemies[j].type == BOSS_SPRITE) {
 						Mix_PlayChannel(-1, &sounds[HIT], 0);
-						bossRun += 0.1f;
+						bossRun += 0.15f;
 						std::swap(gameObj[i], gameObj[gameObj.size() - 1]);
 						gameObj.pop_back();
 						i--;
@@ -1329,7 +1331,7 @@ int main(int argc, char *argv[]) {
 		float elapsed = ticks - lastFrameTicks;
 		lastFrameTicks = ticks;
 		float fixedElapsed = elapsed;
-		if (fixedElapsed > FIXED_TIMESTEP * MAX_TIMESTEPS) {
+		/*if (fixedElapsed > FIXED_TIMESTEP * MAX_TIMESTEPS) {
 			fixedElapsed = FIXED_TIMESTEP * MAX_TIMESTEPS;
 		}
 		while (fixedElapsed >= FIXED_TIMESTEP) {
@@ -1361,7 +1363,7 @@ int main(int argc, char *argv[]) {
 					done = true;
 				break;
 			}
-		}
+		}*/
 
 		lastMoved += elapsed;
 		// End Time
