@@ -1,5 +1,5 @@
 #ifdef _WINDOWS
-	#include <GL/glew.h>
+#include <GL/glew.h>
 #endif
 #define STB_IMAGE_IMPLEMENTATION
 #include <SDL.h>
@@ -21,9 +21,9 @@
 using namespace std;
 
 #ifdef _WINDOWS
-	#define RESOURCE_FOLDER ""
+#define RESOURCE_FOLDER ""
 #else
-	#define RESOURCE_FOLDER "NYUCodebase.app/Contents/Resources/"
+#define RESOURCE_FOLDER "NYUCodebase.app/Contents/Resources/"
 #endif
 
 SDL_Window* displayWindow;
@@ -34,7 +34,7 @@ SDL_Window* displayWindow;
 enum GameState { MAIN_MENU, STAGE_1, STAGE_2, STAGE_3, STAGE_4, WIN_SCREEN, LOSE_SCREEN };
 enum Tiles { LEFT, MIDDLE, RIGHT, BOTH, BLOCK };
 enum SoundLoc { JUMP, WALK_1, WALK_2, PORTAL, THROW, STOMP, HIT, SCREECH, DEATH };
-enum SpriteType { PLAYER_SPRITE, MIRROR_SPRITE, GHOST_SPRITE, BOSS_SPRITE, LEFT_TILE, MIDDLE_TILE, RIGHT_TILE, BOTH_TILE, BLOCK_TILE, WARP_TILE, OBJECT_TILE, ROCK_TILE, ROCK_INV, ROCK_PLAYER, ROCK_ENEMY};
+enum SpriteType { PLAYER_SPRITE, MIRROR_SPRITE, GHOST_SPRITE, BOSS_SPRITE, LEFT_TILE, MIDDLE_TILE, RIGHT_TILE, BOTH_TILE, BLOCK_TILE, WARP_TILE, OBJECT_TILE, ROCK_TILE, ROCK_INV, ROCK_PLAYER, ROCK_ENEMY };
 
 // It's all the same
 float texCoords[] = { 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f };
@@ -279,13 +279,13 @@ void setCollideFalse(Entity& entity) {
 
 // Highly unoptimnized, look at W4C1
 void LoadSprites() {
-	// Player with animation
+	// Player
 	GLuint playerTexture = LoadTexture("Textures/players.png");
 	playerSprite.push_back(SheetSprite(playerTexture, 246.0f / 512.0f, 44.0f / 512.0f, 38.0f / 512.0f, 50.0f / 512.0f, 0.3f));
 	playerSprite.push_back(SheetSprite(playerTexture, 282.0f / 512.0f, 345.0f / 512.0f, 38.0f / 512.0f, 48.0f / 512.0f, 0.3f));
 	playerSprite.push_back(SheetSprite(playerTexture, 246.0f / 512.0f, 446.0f / 512.0f, 38.0f / 512.0f, 50.0f / 512.0f, 0.3f));
 
-	// Portal, all 8 combine to create a portal
+	// Portal
 	GLuint portalTexture = LoadTexture("Textures/portal.png");
 	portalSprite.push_back(SheetSprite(portalTexture, 0.0f / 840.0f, 0.0f / 457.0f, 209.0f / 840.0f, 228.0f / 457.0f, 0.8f));
 	portalSprite.push_back(SheetSprite(portalTexture, 210.0f / 840.0f, 0.0f / 457.0f, 209.0f / 840.0f, 228.0f / 457.0f, 0.8f));
@@ -296,7 +296,7 @@ void LoadSprites() {
 	portalSprite.push_back(SheetSprite(portalTexture, 420.0f / 840.0f, 229.0f / 457.0f, 209.0f / 840.0f, 228.0f / 457.0f, 0.8f));
 	portalSprite.push_back(SheetSprite(portalTexture, 630.0f / 840.0f, 229.0f / 457.0f, 209.0f / 840.0f, 228.0f / 457.0f, 0.8f));
 
-	// Tiles - left, right, middle, curved both size, raised tile
+	// Tiles
 	GLuint tileTexture = LoadTexture("Textures/tiles.png");
 	bgFloor.push_back(SheetSprite(tileTexture, 325.0f / 512.0f, 882.0f / 1024.0f, 64.0f / 512.0f, 64.0f / 1024.0f, 0.3f));
 	bgFloor.push_back(SheetSprite(tileTexture, 390.0f / 512.0f, 520.0f / 1024.0f, 64.0f / 512.0f, 64.0f / 1024.0f, 0.3f));
@@ -304,7 +304,7 @@ void LoadSprites() {
 	bgFloor.push_back(SheetSprite(tileTexture, 390.0f / 512.0f, 392.0f / 1024.0f, 64.0f / 512.0f, 64.0f / 1024.0f, 0.3f));
 	bgFloor.push_back(SheetSprite(tileTexture, 390.0f / 512.0f, 650.0f / 1024.0f, 64.0f / 512.0f, 64.0f / 1024.0f, 0.3f));
 
-	// Rocks - eight different rock types, randomly generated in game
+	// Rocks
 	GLuint rockTexture = LoadTexture("Textures/rocks.png");
 	rockSprite.push_back(SheetSprite(rockTexture, 15.0f / 1024.0f, 15.0f / 1024.0f, 98.0f / 1024.0f, 98.0f / 1024.0f, 0.3f));
 	rockSprite.push_back(SheetSprite(rockTexture, 15.0f / 1024.0f, 143.0f / 1024.0f, 98.0f / 1024.0f, 98.0f / 1024.0f, 0.3f));
@@ -347,7 +347,7 @@ void LoadSprites() {
 	GLuint bg1 = LoadTexture("Textures/bg.jpg");
 	background.push_back(Background(-5.0f, 3.0f, 0.0f, bg1));
 }
- 
+
 void LoadMusic() {
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
 	music = Mix_LoadMUS("Sound/bgmusic.mp3");
@@ -382,20 +382,18 @@ void LoadStage1() {
 	player = Entity(0.0f, -1.0f, playerSprite[0], PLAYER_SPRITE);
 	portal = Entity(12.0f, -0.8f, portalSprite[0], WARP_TILE);
 
-	//First Block
 	gameFloor.push_back(Entity(0.0f, -1.3f, bgFloor[LEFT], LEFT_TILE));
 	for (int i = 0; i < 10; i++) {
 		gameFloor.push_back(Entity(0.6f*(i + 1), -1.3f, bgFloor[MIDDLE], MIDDLE_TILE));
 	}
 	gameFloor.push_back(Entity(6.6f, -1.3f, bgFloor[RIGHT], RIGHT_TILE));
 
-	//Second Block
 	gameFloor.push_back(Entity(7.8f, -1.3f, bgFloor[LEFT], LEFT_TILE));
 	for (int i = 13; i < 16; i++) {
 		gameFloor.push_back(Entity(0.6f*(i + 1), -1.3f, bgFloor[MIDDLE], MIDDLE_TILE));
 	}
-	gameFloor.push_back(Entity(10.2f, -1.01f, bgFloor[BOTH], BOTH_TILE)); //elevated tile bottom
-	gameFloor.push_back(Entity(10.2f, -1.3f, bgFloor[BLOCK], BLOCK_TILE)); //elevated tile top
+	gameFloor.push_back(Entity(10.2f, -1.01f, bgFloor[BOTH], BOTH_TILE));
+	gameFloor.push_back(Entity(10.2f, -1.3f, bgFloor[BLOCK], BLOCK_TILE));
 	for (int i = 17; i < 19; i++) {
 		gameFloor.push_back(Entity(0.6f*(i + 1), -1.3f, bgFloor[MIDDLE], MIDDLE_TILE));
 	}
@@ -413,11 +411,11 @@ void LoadStage2() {
 
 	player = Entity(0.0f, -1.0f, playerSprite[0], PLAYER_SPRITE);
 	enemies.push_back(Entity(18.0f, -0.45f, mirrorSprite[0], MIRROR_SPRITE));
-	enemies[enemies.size() - 1].left = true; //or enemies[0]
+	enemies[enemies.size() - 1].left = true;
 	enemyAnim.push_back(0);
 	enemyDelay.push_back(0);
 	portal = Entity(19.8f, -0.8f, portalSprite[0], WARP_TILE); //need to change once everything is done
-	gameObj.push_back(Entity(14.0f, -1.05f, rockSprite[rand() % 7], ROCK_TILE));
+	gameObj.push_back(Entity(14.0f, -0.8f, rockSprite[rand() % 8], ROCK_TILE));
 
 	//First block
 	gameFloor.push_back(Entity(0.0f, -1.3f, bgFloor[LEFT], LEFT_TILE));
@@ -958,8 +956,8 @@ void UpdateGameplay(float elapsed) {
 				if (ghostMoved > 0.5f) {
 					ghostMoved = 0.0f;
 					gameObj.push_back(Entity(enemies[i].position.x, enemies[i].position.y, rockSprite[rand() % 8], ROCK_ENEMY));
-					if (rand() % 2 == 0) 
-						gameObj[gameObj.size() - 1].velocity = Vector3(float(rand() % 5+1), float(rand() % 3+1), 0.0f);
+					if (rand() % 2 == 0)
+						gameObj[gameObj.size() - 1].velocity = Vector3(float(rand() % 5 + 1), float(rand() % 3 + 1), 0.0f);
 					else
 						gameObj[gameObj.size() - 1].velocity = Vector3(-float(rand() % 5 + 1), float(-rand() % 3 + 1), 0.0f);
 					rocksThrown++;
@@ -991,7 +989,8 @@ void UpdateGameplay(float elapsed) {
 				if (bossRun > 0.0f)
 					bossRun -= 3.0f * elapsed;
 			}
-		} else {
+		}
+		else {
 			if (enemyDelay[i] > 0.1f) {
 				enemyAnim[i]++;
 				enemyDelay[i] = 0.0f;
@@ -1006,7 +1005,8 @@ void UpdateGameplay(float elapsed) {
 				enemyAnim[i] = 7;
 			else if (!ghostAttack > 0 && enemyAnim[i] > 6)
 				enemyAnim[i] = 0;
-		} else if (enemyAnim[i] >= 2 && enemies[i].type == BOSS_SPRITE)
+		}
+		else if (enemyAnim[i] >= 2 && enemies[i].type == BOSS_SPRITE)
 			enemyAnim[i] = 0;
 
 		enemyDelay[i] += elapsed;
@@ -1016,7 +1016,7 @@ void UpdateGameplay(float elapsed) {
 	// Throw a rock
 	if (keys[SDL_SCANCODE_SPACE] && rocks.size() > 0 && lastThrown > 0.5f) {
 		Mix_PlayChannel(-1, &sounds[THROW], 0);
-		gameObj.push_back(rocks[rocks.size()-1]);
+		gameObj.push_back(rocks[rocks.size() - 1]);
 		if (player.left) {
 			gameObj[gameObj.size() - 1].position.x = player.position.x - player.sprite.width * 3;
 			gameObj[gameObj.size() - 1].left = true;
@@ -1090,9 +1090,9 @@ void UpdateGameplay(float elapsed) {
 	// Rock Collision handling
 	for (size_t i = 0; i < gameObj.size(); i++) {
 		/*if (gameObj[i].position.y < -21.0f) {
-			std::swap(gameObj[i], gameObj[gameObj.size() - 1]);
-			gameObj.pop_back();
-			i--;
+		std::swap(gameObj[i], gameObj[gameObj.size() - 1]);
+		gameObj.pop_back();
+		i--;
 		}*/
 		if (gameObj[i].type == ROCK_PLAYER) {
 			// Enemy rock collision
@@ -1103,7 +1103,8 @@ void UpdateGameplay(float elapsed) {
 					gameObj[i].position.y + gameObj[i].sprite.height > enemies[j].position.y - enemies[j].sprite.height * 2) {
 					if (enemies[j].type == BOSS_SPRITE) {
 						Mix_PlayChannel(-1, &sounds[HIT], 0);
-						bossRun += 0.15f;
+						if (bossRun < 1.0f)
+							bossRun += 0.15f;
 						std::swap(gameObj[i], gameObj[gameObj.size() - 1]);
 						gameObj.pop_back();
 						i--;
@@ -1278,9 +1279,9 @@ int main(int argc, char *argv[]) {
 	displayWindow = SDL_CreateWindow("Once Fallen", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 360, SDL_WINDOW_OPENGL);
 	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
 	SDL_GL_MakeCurrent(displayWindow, context);
-	#ifdef _WINDOWS
-		glewInit();
-	#endif
+#ifdef _WINDOWS
+	glewInit();
+#endif
 
 	// Setup
 	glViewport(0, 0, 640, 360);
@@ -1330,8 +1331,8 @@ int main(int argc, char *argv[]) {
 		float ticks = (float)SDL_GetTicks() / 1000.0f;
 		float elapsed = ticks - lastFrameTicks;
 		lastFrameTicks = ticks;
-		float fixedElapsed = elapsed;
-		/*if (fixedElapsed > FIXED_TIMESTEP * MAX_TIMESTEPS) {
+		/*float fixedElapsed = elapsed;
+		if (fixedElapsed > FIXED_TIMESTEP * MAX_TIMESTEPS) {
 			fixedElapsed = FIXED_TIMESTEP * MAX_TIMESTEPS;
 		}
 		while (fixedElapsed >= FIXED_TIMESTEP) {
@@ -1374,6 +1375,9 @@ int main(int argc, char *argv[]) {
 		program.setModelMatrix(modelMatrix);
 		program.setProjectionMatrix(projectionMatrix);
 		program.setViewMatrix(viewMatrix);
+
+		if (keys[SDL_SCANCODE_Q])
+			done == true;
 
 		// Update state
 		switch (state) {
